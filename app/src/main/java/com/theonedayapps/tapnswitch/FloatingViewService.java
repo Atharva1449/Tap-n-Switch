@@ -9,10 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class FloatingViewService extends Service implements View.OnClickListener {
 
-
+private int lastaction;
     private WindowManager mWindowManager;
     private View mFloatingView;
     private View collapsedView;
@@ -54,10 +55,11 @@ public class FloatingViewService extends Service implements View.OnClickListener
 
         //adding click listener to close button and expanded view
         mFloatingView.findViewById(R.id.buttonClose).setOnClickListener(this);
+        //mFloatingView.findViewById(R.id.collapsed123).setOnClickListener(this);
         expandedView.setOnClickListener(this);
 
         //adding an touchlistener to make drag movement of the floating widget
-        mFloatingView.findViewById(R.id.relativeLayoutParent).setOnTouchListener(new View.OnTouchListener() {
+        mFloatingView.findViewById(R.id.collapsed_iv).setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
             private float initialTouchX;
@@ -67,6 +69,7 @@ public class FloatingViewService extends Service implements View.OnClickListener
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                         lastaction = MotionEvent.ACTION_DOWN;
                         initialX = params.x;
                         initialY = params.y;
                         initialTouchX = event.getRawX();
@@ -74,12 +77,19 @@ public class FloatingViewService extends Service implements View.OnClickListener
                         return true;
 
                     case MotionEvent.ACTION_UP:
+                            int a=0;
                         //when the drag is ended switching the state of the widget
-                        collapsedView.setVisibility(View.GONE);
-                        expandedView.setVisibility(View.VISIBLE);
+                        if(lastaction==MotionEvent.ACTION_DOWN){
+                        while(a==0){
+
+                          //  mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
+                            Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
+                            a=1;
+                        }}
                         return true;
 
                     case MotionEvent.ACTION_MOVE:
+                        lastaction = MotionEvent.ACTION_MOVE;
                         //this code is helping the widget to move around the screen with fingers
                         params.x = initialX + (int) (event.getRawX() - initialTouchX);
                         params.y = initialY + (int) (event.getRawY() - initialTouchY);
@@ -100,11 +110,16 @@ public class FloatingViewService extends Service implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.layoutExpanded:
+//            case R.id.layoutCollapsed:
+//                //if(lastaction==MotionEvent.ACTION_DOWN){
+//                    Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
+//                    collapsedView.setVisibility(View.VISIBLE);
+//                    expandedView.setVisibility(View.GONE);
+                //}
                 //switching views
-                collapsedView.setVisibility(View.VISIBLE);
-                expandedView.setVisibility(View.GONE);
-                break;
+//                collapsedView.setVisibility(View.VISIBLE);
+//                expandedView.setVisibility(View.GONE);
+//                break;
 
             case R.id.buttonClose:
                 //closing the widget
