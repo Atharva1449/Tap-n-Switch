@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         findViewById(R.id.buttonCreateWidget).setOnClickListener(this);
+
     }
 
 

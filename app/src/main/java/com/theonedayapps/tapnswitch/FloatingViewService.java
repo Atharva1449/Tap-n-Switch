@@ -1,14 +1,19 @@
 package com.theonedayapps.tapnswitch;
 
 import android.app.Service;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class FloatingViewService extends Service implements View.OnClickListener {
@@ -18,6 +23,7 @@ private int lastaction;
     private View mFloatingView;
     private View collapsedView;
     private View expandedView;
+   private Button button;
 
     public FloatingViewService() {
     }
@@ -34,7 +40,7 @@ private int lastaction;
 
         //getting the widget layout from xml using layout inflater
         mFloatingView = LayoutInflater.from(this).inflate(R.layout.layout_floating_widget, null);
-
+       // button=R.id.collapsed_iv
         //setting the layout parameters
         final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -55,11 +61,12 @@ private int lastaction;
 
         //adding click listener to close button and expanded view
         mFloatingView.findViewById(R.id.buttonClose).setOnClickListener(this);
+        mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
         //mFloatingView.findViewById(R.id.collapsed123).setOnClickListener(this);
         expandedView.setOnClickListener(this);
 
         //adding an touchlistener to make drag movement of the floating widget
-        mFloatingView.findViewById(R.id.collapsed_iv).setOnTouchListener(new View.OnTouchListener() {
+        mFloatingView.findViewById(R.id.relativeLayoutParent).setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
             private float initialTouchX;
@@ -120,11 +127,26 @@ private int lastaction;
 //                collapsedView.setVisibility(View.VISIBLE);
 //                expandedView.setVisibility(View.GONE);
 //                break;
+            case R.id.collapsed_iv:
+                Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
+               // openApp(this, "com.google.android.youtube");
 
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                } else {
+                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
+                }
+                break;
             case R.id.buttonClose:
                 //closing the widget
+                Toast.makeText(FloatingViewService.this, "Closed!", Toast.LENGTH_SHORT).show();
+
+
                 stopSelf();
                 break;
         }
     }
+
+
 }

@@ -18,8 +18,7 @@
         </activity>
         <service
             android:name=".FloatingViewService"
-            android:enabled="true"
-            android:exported="false" />
+           />
     </application>
 
 
