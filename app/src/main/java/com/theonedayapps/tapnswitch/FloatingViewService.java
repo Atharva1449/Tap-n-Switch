@@ -1,5 +1,7 @@
 package com.theonedayapps.tapnswitch;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -16,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+
 public class FloatingViewService extends Service implements View.OnClickListener {
 
 private int lastaction;
@@ -24,13 +28,17 @@ private int lastaction;
     private View collapsedView;
     private View expandedView;
    private Button button;
+   private boolean qq=false;
 
     public FloatingViewService() {
     }
+////
 
+    ////
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
+        //return null;
     }
 
     @Override
@@ -84,15 +92,16 @@ private int lastaction;
                         return true;
 
                     case MotionEvent.ACTION_UP:
-                            int a=0;
-                        //when the drag is ended switching the state of the widget
-                        if(lastaction==MotionEvent.ACTION_DOWN){
-                        while(a==0){
-
-                          //  mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
-                            Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
-                            a=1;
-                        }}
+//                            int a=0;
+//                        //when the drag is ended switching the state of the widget
+//                        if(lastaction==MotionEvent.ACTION_DOWN){
+//                        while(a==0){
+//
+//                          //  mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
+//                            Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
+//                            a=1;
+//                        }
+                        //}
                         return true;
 
                     case MotionEvent.ACTION_MOVE:
@@ -128,15 +137,11 @@ private int lastaction;
 //                expandedView.setVisibility(View.GONE);
 //                break;
             case R.id.collapsed_iv:
-                Toast.makeText(FloatingViewService.this, "Clicked!", Toast.LENGTH_SHORT).show();
+                 qq =true;
+                Toast.makeText(FloatingViewService.this, "Clicked"+qq, Toast.LENGTH_SHORT).show();
                // openApp(this, "com.google.android.youtube");
 
-                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
-                if (launchIntent != null) {
-                    startActivity(launchIntent);
-                } else {
-                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
-                }
+
                 break;
             case R.id.buttonClose:
                 //closing the widget
@@ -148,5 +153,39 @@ private int lastaction;
         }
     }
 
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId){
+        onTaskRemoved(intent);
+        Toast.makeText(getApplicationContext(),""+qq,
+                Toast.LENGTH_SHORT).show();
+
+
+
+        ///
+        if(qq==true){
+            Intent act=new Intent(this,MainActivity.class);
+            PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+            if (launchIntent != null) {
+                startActivity(launchIntent);
+            } else {
+                Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
+            }
+        }
+            qq=false;
+        //Notification notification=new NotificationCompat.Builder();
+        //startForeground(1,notification);
+        ///
+        return START_STICKY;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
+        restartServiceIntent.setPackage(getPackageName());
+        startService(restartServiceIntent);
+        super.onTaskRemoved(rootIntent);
+    }
 
 }
