@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.provider.Settings;
 //import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
-
+    private RadioGroup radiogrp;
+    private RadioButton radiobbtn;
+    public int what;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         findViewById(R.id.buttonCreateWidget).setOnClickListener(this);
+        radiogrp=(RadioGroup)findViewById(R.id.radiogroupid);
+        radiogrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radiobbtn=(RadioButton)findViewById(checkedId);
+                switch(checkedId){
+                    case R.id.radiobuttonyt: {
+                        what=1;
+                    }
+                    break;
+                    case R.id.radiobuttonch: {
+                        what=2;
+                    }
+                    break;
+                    case R.id.radiobuttonpdf: {
+                        what=3;
+                    }
+                    break;
+                } }
+        });
 
     }
 

@@ -161,17 +161,32 @@ private int lastaction;
         Toast.makeText(getApplicationContext(),""+qq,
                 Toast.LENGTH_SHORT).show();
 
-
-
+    MainActivity obj=new MainActivity();
+System.out.println(obj.what);
         ///
         if(qq==true){
+            //Toast.makeText(FloatingViewService.this, "-"+obj.yt+" "+obj.ch, Toast.LENGTH_LONG).show();
+
             Intent act=new Intent(this,MainActivity.class);
             PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);
+            if(obj.what==1){
+
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
             if (launchIntent != null) {
                 startActivity(launchIntent);
             } else {
                 Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
+            }
+        }
+        else if(obj.what==2 ){
+
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.chrome");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                } else {
+                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
+                }
+
             }
         }
             qq=false;

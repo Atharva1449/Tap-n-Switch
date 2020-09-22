@@ -53,21 +53,21 @@
         >
 
         <RadioButton
-            android:id="@+id/radiobuttonyes"
+            android:id="@+id/radiobuttonyt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="youtube"
             android:textColor="#94FFFFFF" />
 
         <RadioButton
-            android:id="@+id/radiobuttonno"
+            android:id="@+id/radiobuttonch"
             android:layout_width="193dp"
             android:layout_height="50dp"
             android:text="chrome"
             android:textColor="#94FFFFFF" />
 
         <RadioButton
-            android:id="@+id/radiobuttonmaybe"
+            android:id="@+id/radiobuttonpdf"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="pdf"
