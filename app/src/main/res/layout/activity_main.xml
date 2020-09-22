@@ -1,19 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#2F3136"
+    android:fadingEdge="horizontal|vertical"
+    android:gravity="center|top"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonCreateWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/buttonlay"
+        android:text="Start tap n switch button"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#D9FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="# Select app you want to open using tap-n-switch"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#8E9297"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radiogroupid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="186dp"
-        android:layout_marginRight="186dp"
-        android:layout_marginBottom="670dp"
-        android:text="Create Floating Widget" />
+        android:layout_gravity="center"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/buttonlay"
+        >
 
+        <RadioButton
+            android:id="@+id/radiobuttonyes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="youtube"
+            android:textColor="#94FFFFFF" />
 
-</RelativeLayout>
+        <RadioButton
+            android:id="@+id/radiobuttonno"
+            android:layout_width="193dp"
+            android:layout_height="50dp"
+            android:text="chrome"
+            android:textColor="#94FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/radiobuttonmaybe"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="pdf"
+            android:textColor="#94FFFFFF" />
+    </RadioGroup>
+
+</LinearLayout>

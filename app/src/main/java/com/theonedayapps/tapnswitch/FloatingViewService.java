@@ -1,6 +1,7 @@
 package com.theonedayapps.tapnswitch;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ActivityNotFoundException;
@@ -68,7 +69,7 @@ private int lastaction;
         expandedView = mFloatingView.findViewById(R.id.layoutExpanded);
 
         //adding click listener to close button and expanded view
-        mFloatingView.findViewById(R.id.buttonClose).setOnClickListener(this);
+       // mFloatingView.findViewById(R.id.buttonClose).setOnClickListener(this);
         mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
         //mFloatingView.findViewById(R.id.collapsed123).setOnClickListener(this);
         expandedView.setOnClickListener(this);
@@ -143,13 +144,13 @@ private int lastaction;
 
 
                 break;
-            case R.id.buttonClose:
-                //closing the widget
-                Toast.makeText(FloatingViewService.this, "Closed!", Toast.LENGTH_SHORT).show();
-
-
-                stopSelf();
-                break;
+//            case R.id.buttonClose:
+//                //closing the widget
+//                Toast.makeText(FloatingViewService.this, "Closed!", Toast.LENGTH_SHORT).show();
+//
+//
+//                stopSelf();
+//                break;
         }
     }
 
@@ -174,8 +175,9 @@ private int lastaction;
             }
         }
             qq=false;
-        //Notification notification=new NotificationCompat.Builder();
-        //startForeground(1,notification);
+        //String abc;
+        //Notification notification;
+       // startForeground(1,notification);
         ///
         return START_STICKY;
     }

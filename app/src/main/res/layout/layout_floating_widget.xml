@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#19100F0F">
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
@@ -17,7 +16,7 @@
             android:id="@+id/layoutCollapsed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#321C1C1C"
+            android:background="@drawable/buttonlay"
             android:fadingEdge="horizontal|vertical"
             android:orientation="vertical"
             android:visibility="visible">
@@ -32,12 +31,6 @@
                 android:textCursorDrawable="@drawable/icon_main1" />
 
 
-            <ImageView
-                android:id="@+id/buttonClose"
-                android:layout_width="20dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="50dp"
-                android:src="@drawable/icon_close" />
 
             <TextView
                 android:id="@+id/textView"
@@ -45,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:text="tap"
+                android:text=" tap    "
                 android:textColor="#88FFFFFF" />
 
         </RelativeLayout>
