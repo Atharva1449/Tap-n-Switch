@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
     private RadioGroup radiogrp;
     private RadioButton radiobbtn;
-    public int what;
+    public static int what;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

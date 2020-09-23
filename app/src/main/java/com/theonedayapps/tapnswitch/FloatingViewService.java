@@ -18,8 +18,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-
+import com.theonedayapps.tapnswitch.MainActivity;
 import androidx.core.app.NotificationCompat;
+
+import static com.theonedayapps.tapnswitch.MainActivity.what;
 
 public class FloatingViewService extends Service implements View.OnClickListener {
 
@@ -154,22 +156,22 @@ private int lastaction;
         }
     }
 
-
+    static int what1;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         onTaskRemoved(intent);
         Toast.makeText(getApplicationContext(),""+qq,
                 Toast.LENGTH_SHORT).show();
-
-    MainActivity obj=new MainActivity();
-System.out.println(obj.what);
+what1=what;
+   // MainActivity obj=new MainActivity();
+//System.out.println(obj.what);
         ///
         if(qq==true){
-            //Toast.makeText(FloatingViewService.this, "-"+obj.yt+" "+obj.ch, Toast.LENGTH_LONG).show();
+            Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_LONG).show();
 
             Intent act=new Intent(this,MainActivity.class);
             PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);
-            if(obj.what==1){
+            if(what1==1){
 
             Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
             if (launchIntent != null) {
@@ -178,7 +180,7 @@ System.out.println(obj.what);
                 Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
             }
         }
-        else if(obj.what==2 ){
+        else if(what1==2 ){
 
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.chrome");
                 if (launchIntent != null) {
