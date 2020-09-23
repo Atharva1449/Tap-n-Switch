@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,78 +9,84 @@
     android:gravity="center|top"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonCreateWidget"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/buttonlay"
-        android:text="Start tap n switch button"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#D9FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="# Select app you want to open using tap-n-switch"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="#8E9297"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radiogroupid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/buttonlay"
-        >
-
-        <RadioButton
-            android:id="@+id/radiobuttonyt"
+        <Button
+            android:id="@+id/buttonCreateWidget"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="youtube"
-            android:textColor="#94FFFFFF" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/buttonlay"
+            android:text="Start tap n switch button"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#D9FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/radiobuttonch"
-            android:layout_width="193dp"
-            android:layout_height="50dp"
-            android:text="chrome"
-            android:textColor="#94FFFFFF" />
-
-        <RadioButton
-            android:id="@+id/radiobuttonpdf"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="pdf"
-            android:textColor="#94FFFFFF" />
-    </RadioGroup>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="# Select app you want to open using tap-n-switch"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#8E9297"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:text="Stop tap-n-switch button" />
+        <RadioGroup
+            android:id="@+id/radiogroupid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/buttonlay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+            <RadioButton
+                android:id="@+id/radiobuttonyt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="youtube"
+                android:textColor="#94FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/radiobuttonch"
+                android:layout_width="193dp"
+                android:layout_height="50dp"
+                android:text="chrome"
+                android:textColor="#94FFFFFF" />
+
+            <RadioButton
+                android:id="@+id/radiobuttonpdf"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="pdf"
+                android:textColor="#94FFFFFF" />
+        </RadioGroup>
+        <Button
+            android:id="@+id/buttonstop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="70dp"
+            android:background="@drawable/stopbuttonlay"
+            android:text="Stop tap-n-switch button"
+            android:textColor="#95FFFFFF" />
+    </LinearLayout>
+
+
+
+
+</ScrollView>

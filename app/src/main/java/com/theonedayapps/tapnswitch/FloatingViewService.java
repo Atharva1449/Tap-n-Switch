@@ -1,5 +1,6 @@
 package com.theonedayapps.tapnswitch;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.PendingIntent;
@@ -12,6 +13,7 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +23,9 @@ import android.widget.Toast;
 import com.theonedayapps.tapnswitch.MainActivity;
 import androidx.core.app.NotificationCompat;
 
+import static android.app.AlarmManager.ELAPSED_REALTIME;
+import static android.os.SystemClock.elapsedRealtime;
+import static com.theonedayapps.tapnswitch.MainActivity.tobeornottobe;
 import static com.theonedayapps.tapnswitch.MainActivity.what;
 
 public class FloatingViewService extends Service implements View.OnClickListener {
@@ -40,8 +45,8 @@ private int lastaction;
     ////
     @Override
     public IBinder onBind(Intent intent) {
-        throw new UnsupportedOperationException("Not yet implemented");
-        //return null;
+      //  throw new UnsupportedOperationException("Not yet implemented");
+        return null;
     }
 
     @Override
@@ -72,7 +77,7 @@ private int lastaction;
 
         //adding click listener to close button and expanded view
        // mFloatingView.findViewById(R.id.buttonClose).setOnClickListener(this);
-        mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(this);
+
         //mFloatingView.findViewById(R.id.collapsed123).setOnClickListener(this);
         expandedView.setOnClickListener(this);
 
@@ -123,6 +128,7 @@ private int lastaction;
     @Override
     public void onDestroy() {
         super.onDestroy();
+        //disconnect();
         if (mFloatingView != null) mWindowManager.removeView(mFloatingView);
     }
 
@@ -139,13 +145,13 @@ private int lastaction;
 //                collapsedView.setVisibility(View.VISIBLE);
 //                expandedView.setVisibility(View.GONE);
 //                break;
-            case R.id.collapsed_iv:
-                 qq =true;
-                Toast.makeText(FloatingViewService.this, "Clicked"+qq, Toast.LENGTH_SHORT).show();
-               // openApp(this, "com.google.android.youtube");
+//            case R.id.collapsed_iv:
+//                 qq =true;
+//                Toast.makeText(FloatingViewService.this, "Clicked"+qq, Toast.LENGTH_SHORT).show();
+//               // openApp(this, "com.google.android.youtube");
 
 
-                break;
+                //break;
 //            case R.id.buttonClose:
 //                //closing the widget
 //                Toast.makeText(FloatingViewService.this, "Closed!", Toast.LENGTH_SHORT).show();
@@ -156,20 +162,29 @@ private int lastaction;
         }
     }
 
-    static int what1;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         onTaskRemoved(intent);
         Toast.makeText(getApplicationContext(),""+qq,
                 Toast.LENGTH_SHORT).show();
-what1=what;
+        int what1=what;
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qq=true;
+            }
+        });
    // MainActivity obj=new MainActivity();
 //System.out.println(obj.what);
         ///
+
         if(qq==true){
             Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_LONG).show();
 
-            Intent act=new Intent(this,MainActivity.class);
+           Intent act=new Intent(this,MainActivity.class);
             PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);
             if(what1==1){
 
@@ -199,12 +214,22 @@ what1=what;
         return START_STICKY;
     }
 
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        Intent restartServiceIntent = new Intent(getApplicationContext(),this.getClass());
-        restartServiceIntent.setPackage(getPackageName());
-        startService(restartServiceIntent);
-        super.onTaskRemoved(rootIntent);
+
+
+
+        @Override
+        public void onTaskRemoved (Intent rootIntent){
+        if(tobeornottobe==false) {
+            Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
+
+            PendingIntent restartServicePendingIntent = PendingIntent.getService(
+                    getApplicationContext(), 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
+            AlarmManager alarmService = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmService.set(ELAPSED_REALTIME, elapsedRealtime() + 1000,
+                    restartServicePendingIntent);
+
+            super.onTaskRemoved(rootIntent);
+        }
     }
 
 }

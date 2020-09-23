@@ -7,17 +7,21 @@ import android.os.Bundle;
 import android.provider.Settings;
 //import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity  {
     private static final int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
     private RadioGroup radiogrp;
     private RadioButton radiobbtn;
+    private Button startbutton;
+    private Button stopbutton;
     public static int what;
+    public static boolean tobeornottobe=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +30,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
             askPermission();
         }
+        stopbutton=findViewById(R.id.buttonstop);
 
-        findViewById(R.id.buttonCreateWidget).setOnClickListener(this);
+       startbutton= findViewById(R.id.buttonCreateWidget);
+       startbutton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               tobeornottobe=false;
+               if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                   startService(new Intent(MainActivity.this, FloatingViewService.class));
+                   finish();
+               } else if (Settings.canDrawOverlays(MainActivity.this)) {
+                   startService(new Intent(MainActivity.this, FloatingViewService.class));
+                   finish();
+               } else {
+                   askPermission();
+                  // Toast.makeText(this, "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
+               }
+           }
+       });
         radiogrp=(RadioGroup)findViewById(R.id.radiogroupid);
         radiogrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -49,6 +70,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } }
         });
 
+        stopbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tobeornottobe=true;
+                Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
+                stopService(serviceIntent);
+                //System.out.println("aaaa");
+            }
+        });
+
     }
 
 
@@ -58,18 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent, SYSTEM_ALERT_WINDOW_PERMISSION);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            startService(new Intent(MainActivity.this, FloatingViewService.class));
-            finish();
-        } else if (Settings.canDrawOverlays(this)) {
-            startService(new Intent(MainActivity.this, FloatingViewService.class));
-            finish();
-        } else {
-            askPermission();
-            Toast.makeText(this, "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//
+//    }
 }
  
