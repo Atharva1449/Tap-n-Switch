@@ -84,6 +84,18 @@
             android:background="@drawable/stopbuttonlay"
             android:text="Stop tap-n-switch button"
             android:textColor="#95FFFFFF" />
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/adView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:gnt_template_type="@layout/gnt_medium_template_view"
+             />
+
+
     </LinearLayout>
 
 

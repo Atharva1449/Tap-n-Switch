@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.theonedayapps.tapnswitch.MainActivity;
 import androidx.core.app.NotificationCompat;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.app.AlarmManager.ELAPSED_REALTIME;
 import static android.os.SystemClock.elapsedRealtime;
@@ -37,6 +41,7 @@ private int lastaction;
     private View expandedView;
    private Button button;
    private boolean qq=false;
+   public int counter=0;
 
     public FloatingViewService() {
     }
@@ -125,12 +130,7 @@ private int lastaction;
         });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //disconnect();
-        if (mFloatingView != null) mWindowManager.removeView(mFloatingView);
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -165,6 +165,7 @@ private int lastaction;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
+        startTimer();
         onTaskRemoved(intent);
         Toast.makeText(getApplicationContext(),""+qq,
                 Toast.LENGTH_SHORT).show();
@@ -216,11 +217,32 @@ private int lastaction;
     }
 
 
+/////////////////////////
+private Timer timer;
+    private TimerTask timerTask;
+    public void startTimer() {
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            public void run() {
+                Log.i("Count", "=========  "+ (counter++));
+            }
+        };
+        timer.schedule(timerTask, 1000, 1000); //
+    }
 
+    public void stoptimertask() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    ///////////////////
 
         @Override
         public void onTaskRemoved (Intent rootIntent){
         if(tobeornottobe==false) {
+            startTimer();
             Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
 
             PendingIntent restartServicePendingIntent = PendingIntent.getService(
@@ -233,4 +255,16 @@ private int lastaction;
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //disconnect();
+        if (mFloatingView != null) mWindowManager.removeView(mFloatingView);
+        stoptimertask();
+
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("restartservice");
+        broadcastIntent.setClass(this, MainActivity.class);
+        this.sendBroadcast(broadcastIntent);
+    }
 }
