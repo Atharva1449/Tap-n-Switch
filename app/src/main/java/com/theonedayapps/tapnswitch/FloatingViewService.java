@@ -207,6 +207,16 @@ private int lastaction;
                 }
 
             }
+            else if(what1==3 ){
+
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("cn.wps.moffice_eng");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                } else {
+                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
+                }
+
+            }
         }
             qq=false;
         //String abc;
