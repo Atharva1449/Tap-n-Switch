@@ -167,8 +167,8 @@ private int lastaction;
     public int onStartCommand(Intent intent, int flags, int startId){
         startTimer();
         onTaskRemoved(intent);
-        Toast.makeText(getApplicationContext(),""+qq,
-                Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getApplicationContext(),""+qq,
+              //  Toast.LENGTH_SHORT).show();
         int what1=what;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -184,7 +184,7 @@ private int lastaction;
         ///
 
         if(qq==true){
-            Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_LONG).show();
+            Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_SHORT).show();
 
            Intent act=new Intent(this,MainActivity.class);
             PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);

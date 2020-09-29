@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity  {
     private RadioButton radiobbtn;
     private Button startbutton;
     private Button stopbutton;
+    private TextView yttext;
     public static int what;
     public static boolean tobeornottobe=false;
     private AdView mAdView;
@@ -42,7 +44,13 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+yttext=findViewById(R.id.textyt);
+yttext.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=6f8UWpneEzA")));
+    }
+});
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         AdLoader adLoader = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -84,6 +92,7 @@ public class MainActivity extends AppCompatActivity  {
            @Override
            public void onClick(View view) {
                /////interstitial ad
+               if(what==1 || what==2 || what==3){
                if (mInterstitialAd.isLoaded()) {
                    mInterstitialAd.show();
                } else {
@@ -102,6 +111,7 @@ public class MainActivity extends AppCompatActivity  {
                   // Toast.makeText(this, "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
                }
            }
+           else{Toast.makeText(MainActivity.this, "Select an app you want to open", Toast.LENGTH_LONG).show();}}
        });
        /////////////////////////////////////////////////////////////////////////////////////////////////////
         radiogrp=(RadioGroup)findViewById(R.id.radiogroupid);
@@ -132,6 +142,7 @@ public class MainActivity extends AppCompatActivity  {
                 tobeornottobe=true;
                 Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
                 stopService(serviceIntent);
+                Toast.makeText(MainActivity.this, "Click Again", Toast.LENGTH_LONG).show();
                 //System.out.println("aaaa");
             }
         });
