@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">tapnswitch</string>
+    <string name="appid">ca-app-pub-2702384964417852~1660021322</string>
+    <string name="nativead">ca-app-pub-2702384964417852/3099937959</string>
+    <string name="interstitialad">ca-app-pub-2702384964417852/2151664274</string>
+
+    <string name="testappid">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="testnativead">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="testinterstitialad">ca-app-pub-3940256099942544/8691691433</string>
 </resources>
