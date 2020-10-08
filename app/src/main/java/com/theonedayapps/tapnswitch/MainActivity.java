@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity  {
     private Button startbutton;
     private Button stopbutton;
     private TextView yttext;
-    public static int what;
+    public static byte what;
     public static boolean tobeornottobe=false;
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
@@ -135,16 +135,15 @@ yttext.setOnClickListener(new View.OnClickListener() {
                 } }
         });
         //////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
+        stopService(serviceIntent);
         stopbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tobeornottobe=true;
                 Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
                 stopService(serviceIntent);
-                 serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
-                stopService(serviceIntent);
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
                 //System.out.println("aaaa");
 
 

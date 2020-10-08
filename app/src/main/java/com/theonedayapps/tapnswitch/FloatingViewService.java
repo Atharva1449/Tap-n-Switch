@@ -42,7 +42,8 @@ private int lastaction;
    private Button button;
    private boolean qq=false;
    public int counter=0;
-
+     byte what1=what;
+     Intent launchIntent;
     public FloatingViewService() {
     }
 ////
@@ -169,58 +170,51 @@ private int lastaction;
         onTaskRemoved(intent);
       //  Toast.makeText(getApplicationContext(),""+qq,
               //  Toast.LENGTH_SHORT).show();
-        int what1=what;
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         mFloatingView.findViewById(R.id.collapsed_iv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qq=true;
+               // qq=true;
+                //if(qq==true){
+                    //Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_SHORT).show();
+                    //Intent act=new Intent(FloatingViewService.this,MainActivity.class);
+                  //  PendingIntent pendingIntent= PendingIntent.getActivity(FloatingViewService.this,0,act,0);
+
+                    switch(what1) {
+                        case 1:
+                            launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+                                startActivity(launchIntent);
+
+                            break;
+
+                        case 2:
+                            launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.chrome");
+                                startActivity(launchIntent);
+
+                            break;
+
+                        case 3:
+                            launchIntent = getPackageManager().getLaunchIntentForPackage("cn.wps.moffice_eng");
+                                startActivity(launchIntent);
+
+                            break;
+                    }
+
+                //}
             }
         });
    // MainActivity obj=new MainActivity();
 //System.out.println(obj.what);
         ///
 
-        if(qq==true){
-            Toast.makeText(FloatingViewService.this, "-", Toast.LENGTH_SHORT).show();
 
-           Intent act=new Intent(this,MainActivity.class);
-            PendingIntent pendingIntent= PendingIntent.getActivity(this,0,act,0);
-            if(what1==1){
-
-            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
-            if (launchIntent != null) {
-                startActivity(launchIntent);
-            } else {
-                Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
-            }
-        }
-        else if(what1==2 ){
-
-                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.chrome");
-                if (launchIntent != null) {
-                    startActivity(launchIntent);
-                } else {
-                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
-                }
-
-            }
-            else if(what1==3 ){
-
-                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("cn.wps.moffice_eng");
-                if (launchIntent != null) {
-                    startActivity(launchIntent);
-                } else {
-                    Toast.makeText(FloatingViewService.this, "There is no package available in android", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }
-            qq=false;
+            //qq=false;
         //String abc;
-        //Notification notification;
+        //Notificint what1=what;ation notification;
        // startForeground(1,notification);
         ///
         return START_STICKY;
