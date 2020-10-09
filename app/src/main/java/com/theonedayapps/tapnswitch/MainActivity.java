@@ -51,8 +51,8 @@ yttext.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=6f8UWpneEzA")));
     }
 });
-        MobileAds.initialize(this, String.valueOf(R.string.testappid));//orignal id:ca-app-pub-2702384964417852~1660021322
-        AdLoader adLoader = new AdLoader.Builder(this,String.valueOf(R.string.testnativead) )//orignal id:ca-app-pub-2702384964417852/3099937959
+        MobileAds.initialize(this, String.valueOf(R.string.appid));//orignal id:ca-app-pub-2702384964417852~1660021322
+        AdLoader adLoader = new AdLoader.Builder(this,String.valueOf(R.string.nativead) )//orignal id:ca-app-pub-2702384964417852/3099937959
                 .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
                     @Override
                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
@@ -69,7 +69,7 @@ yttext.setOnClickListener(new View.OnClickListener() {
         adLoader.loadAd(new AdRequest.Builder().build());
 ////////////////interstitial
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(String.valueOf(R.string.testinterstitialad));///orignal id:ca-app-pub-2702384964417852/2151664274
+        mInterstitialAd.setAdUnitId(String.valueOf(R.string.interstitialad));///orignal id:ca-app-pub-2702384964417852/2151664274
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mInterstitialAd.setAdListener(new AdListener() {
