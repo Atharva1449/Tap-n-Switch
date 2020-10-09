@@ -42,9 +42,10 @@
                 android:text="switch "
                 android:textColor="#88FFFFFF" />
 
+
         </RelativeLayout>
 
-        <!-- this is the expanded layout -->
+        <!-- this is keeping the floating window alive-->
         <LinearLayout
             android:id="@+id/layoutExpanded"
             android:layout_width="wrap_content"
@@ -61,14 +62,7 @@
                 android:src="@drawable/icon_main1"
                 tools:ignore="ContentDescription" />
 
-            <LinearLayout
-                android:id="@+id/buttonSimplifiedCoding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-
-            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

@@ -143,7 +143,7 @@ yttext.setOnClickListener(new View.OnClickListener() {
                 tobeornottobe=true;
                 Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
                 stopService(serviceIntent);
-              //  Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
+              Toast.makeText(MainActivity.this, "CLICK AGAIN", Toast.LENGTH_LONG).show();
                 //System.out.println("aaaa");
 
 
