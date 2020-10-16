@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/appid"/>
+            android:value="ca-app-pub-4313320967336759~1820517430"/>
         <service
             android:name=".FloatingViewService"
             android:enabled="true">
