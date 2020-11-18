@@ -1,6 +1,8 @@
 package com.theonedayapps.tapnswitch;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,16 +43,23 @@ public class MainActivity extends AppCompatActivity  {
     public static boolean tobeornottobe=false;
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
+    private TextView text302;
+    private int var1=0;
+    private SharedPreferences sprefs;
+    private static final String myprefrances="my_prefs_file";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//to make transperant status and nav bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//
+
+        text302=(TextView)findViewById(R.id.textView302);
 //
 
 
-//
 info=findViewById(R.id.buttoninfo);
 info.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -99,6 +108,13 @@ info.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                /////interstitial ad
+
+               text302.setText("Active");
+               sprefs=getSharedPreferences(myprefrances,0);
+               SharedPreferences.Editor editor=sprefs.edit();
+               editor.putString("message",text302.getText().toString());
+               editor.commit();
+
                if(what==1 || what==2 || what==3){
                if (mInterstitialAd.isLoaded()) {
                    mInterstitialAd.show();
@@ -147,6 +163,15 @@ info.setOnClickListener(new View.OnClickListener() {
         stopbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                var1++;
+                if(var1==2){
+
+                    text302.setText("Inactive");
+                    sprefs=getSharedPreferences(myprefrances,0);
+                    SharedPreferences.Editor editor=sprefs.edit();
+                    editor.putString("message",text302.getText().toString());
+                    editor.commit();
+                }
                 tobeornottobe=true;
                 Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
                 stopService(serviceIntent);
@@ -159,6 +184,12 @@ info.setOnClickListener(new View.OnClickListener() {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        SharedPreferences shprefs=getSharedPreferences(myprefrances,0);
+        if(shprefs.contains("message")){
+            String message1=shprefs.getString("message","notfound");
+            text302.setText(message1);
+        }else{text302.setText("Inactive");}
     }
 
 
@@ -174,41 +205,6 @@ info.setOnClickListener(new View.OnClickListener() {
 //    }
 
 
-    //
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
-
-    private void hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
-    }
-
-    // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
-    private void showSystemUI() {
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
     //
 
 
