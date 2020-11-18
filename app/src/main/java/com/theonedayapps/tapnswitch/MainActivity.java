@@ -8,6 +8,7 @@ import android.provider.Settings;
 //import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity  {
     private RadioButton radiobbtn;
     private Button startbutton;
     private Button stopbutton;
-    private TextView yttext;
+    //private TextView yttext;
+    private Button info;
     public static byte what;
     public static boolean tobeornottobe=false;
     private AdView mAdView;
@@ -44,29 +46,34 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-yttext=findViewById(R.id.textyt);
-yttext.setOnClickListener(new View.OnClickListener() {
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
+
+
+//
+info=findViewById(R.id.buttoninfo);
+info.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=6f8UWpneEzA")));
     }
 });
         MobileAds.initialize(this,"ca-app-pub-4313320967336759~1820517430");//
-        AdLoader adLoader = new AdLoader.Builder(this,"ca-app-pub-4313320967336759/9507435764")//
-                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                      //  NativeTemplateStyle styles = new NativeTemplateStyle.Builder().withMainBackgroundColor(background).build();
-
-                        TemplateView template = findViewById(R.id.adView4);
-                       // template.setStyles(styles);
-                        template.setNativeAd(unifiedNativeAd);
-
-                    }
-                })
-                .build();
-
-        adLoader.loadAd(new AdRequest.Builder().build());
+//        AdLoader adLoader = new AdLoader.Builder(this,"ca-app-pub-4313320967336759/9507435764")//
+//                .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+//                    @Override
+//                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+//                      //  NativeTemplateStyle styles = new NativeTemplateStyle.Builder().withMainBackgroundColor(background).build();
+//
+//                        TemplateView template = findViewById(R.id.adView4);
+//                       // template.setStyles(styles);
+//                        template.setNativeAd(unifiedNativeAd);
+//
+//                    }
+//                })
+//                .build();
+//
+//        adLoader.loadAd(new AdRequest.Builder().build());
 ////////////////interstitial
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-4313320967336759/2869041078");///
@@ -165,5 +172,45 @@ yttext.setOnClickListener(new View.OnClickListener() {
 //    public void onClick(View v) {
 //
 //    }
+
+
+    //
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    private void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private void showSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
+    //
+
+
 }
  

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#2F3136"
+    android:background="@drawable/back1gradient"
     android:fadingEdge="horizontal|vertical"
     android:gravity="center|top"
     android:orientation="vertical">
@@ -14,54 +14,54 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textyt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="15dp"
-            android:text=" How to use ?(click here)"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#D08E9297"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/buttonCreateWidget"
+            android:id="@+id/buttoninfo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+
+            android:background="@drawable/ic_outline_info_24" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_marginTop="150dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/buttonlay"
-            android:text="Start tap n switch button"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#D9FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_height="128dp"
+            app:srcCompat="@drawable/tick" />
 
         <TextView
-            android:id="@+id/textView3"
+                android:id="@+id/textView302"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+                android:text="Active"
+            android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/buttonstop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginLeft="15dp"
-            android:text="# Select app you want to open using tap-n-switch"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#8E9297"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_height="35dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="140dp"
+            android:background="@drawable/stopbuttonlay"
+            android:text="Stop !"
+            android:textColor="#95FFFFFF" />
 
         <RadioGroup
             android:id="@+id/radiogroupid"
-            android:layout_width="wrap_content"
+            android:layout_width="281dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/buttonlay"
+
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,44 +71,52 @@
                 android:id="@+id/radiobuttonyt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Youtube"
-                android:textColor="#94FFFFFF" />
+                android:text="    Youtube"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:button="@drawable/radiobuttonstyle"
+                />
 
             <RadioButton
                 android:id="@+id/radiobuttonch"
                 android:layout_width="193dp"
                 android:layout_height="50dp"
-                android:text="Chrome"
-                android:textColor="#94FFFFFF" />
+                android:text="    Chrome"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:button="@drawable/radiobuttonstylechrome"
+                />
 
             <RadioButton
                 android:id="@+id/radiobuttonpdf"
-                android:layout_width="match_parent"
+                android:layout_width="236dp"
                 android:layout_height="50dp"
-                android:text="pdf(need wps installed)"
-                android:textColor="#94FFFFFF" />
+                android:text="    PDF(needs wps installed)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:button="@drawable/radiobuttonstylepdf"
+
+                />
         </RadioGroup>
+
         <Button
-            android:id="@+id/buttonstop"
+            android:id="@+id/buttonCreateWidget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="70dp"
-            android:background="@drawable/stopbuttonlay"
-            android:text="Stop tap-n-switch button"
-            android:textColor="#95FFFFFF" />
-
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:id="@+id/adView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:gnt_template_type="@layout/gnt_medium_template_view"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttonlay"
+            android:text="Start tap n switch button"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
              />
-
 
     </LinearLayout>
 
