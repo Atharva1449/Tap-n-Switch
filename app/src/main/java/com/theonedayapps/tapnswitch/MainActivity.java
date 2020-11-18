@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity  {
     private RadioButton radiobbtn;
     private Button startbutton;
     private Button stopbutton;
+    private ImageView imageView;
     //private TextView yttext;
     private Button info;
     public static byte what;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity  {
         text302=(TextView)findViewById(R.id.textView302);
 //
 
-
+imageView =(ImageView)findViewById(R.id.imageView1);
 info=findViewById(R.id.buttoninfo);
 info.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -167,6 +169,7 @@ info.setOnClickListener(new View.OnClickListener() {
                 if(var1==2){
 
                     text302.setText("Inactive");
+                    imageView.setImageResource(R.drawable.ic_baseline_warning_24);
                     sprefs=getSharedPreferences(myprefrances,0);
                     SharedPreferences.Editor editor=sprefs.edit();
                     editor.putString("message",text302.getText().toString());
@@ -189,7 +192,12 @@ info.setOnClickListener(new View.OnClickListener() {
         if(shprefs.contains("message")){
             String message1=shprefs.getString("message","notfound");
             text302.setText(message1);
-        }else{text302.setText("Inactive");}
+            if(message1=="Active"){
+               imageView.setImageResource(R.drawable.tick);
+            }
+        }else{text302.setText("Inactive");
+            imageView.setImageResource(R.drawable.ic_baseline_warning_24);
+        }
     }
 
 
