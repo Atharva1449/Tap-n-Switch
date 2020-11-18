@@ -178,7 +178,8 @@ info.setOnClickListener(new View.OnClickListener() {
                 tobeornottobe=true;
                 Intent serviceIntent = new Intent(MainActivity.this, FloatingViewService.class);
                 stopService(serviceIntent);
-              Toast.makeText(MainActivity.this, "CLICK AGAIN", Toast.LENGTH_LONG).show();
+                if(var1<2){
+              Toast.makeText(MainActivity.this, "CLICK AGAIN", Toast.LENGTH_SHORT).show();}
                 //System.out.println("aaaa");
 
 

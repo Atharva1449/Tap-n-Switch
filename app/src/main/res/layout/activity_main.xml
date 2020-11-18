@@ -19,12 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="35dp">
+            android:layout_marginTop="38dp">
 
             <Button
                 android:id="@+id/buttoninfo"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
 
                 android:background="@drawable/ic_outline_info_24" />
 
@@ -43,7 +43,7 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="145dp"
             android:layout_width="match_parent"
             android:layout_height="128dp"
 
@@ -75,13 +75,22 @@
             android:text="Stop !"
             android:textColor="#95FFFFFF" />
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="       Select your app >"
+            android:layout_marginTop="70dp"
+            android:textColor="#95FFFFFF"
+            />
+
         <RadioGroup
             android:id="@+id/radiogroupid"
             android:layout_width="281dp"
             android:layout_height="wrap_content"
 
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
