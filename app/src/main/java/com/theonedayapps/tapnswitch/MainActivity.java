@@ -112,11 +112,12 @@ info.setOnClickListener(new View.OnClickListener() {
                /////interstitial ad
 
                text302.setText("Active");
+               ///////////////////////////////////////////////////////1
                sprefs=getSharedPreferences(myprefrances,0);
                SharedPreferences.Editor editor=sprefs.edit();
                editor.putString("message",text302.getText().toString());
                editor.commit();
-
+////////////////////////////////////////////////////////////////////
                if(what==1 || what==2 || what==3){
                if (mInterstitialAd.isLoaded()) {
                    mInterstitialAd.show();
@@ -188,7 +189,7 @@ info.setOnClickListener(new View.OnClickListener() {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+///////////////////////////////////////////////////////////////////////////////////1.1
         SharedPreferences shprefs=getSharedPreferences(myprefrances,0);
         if(shprefs.contains("message")){
             String message1=shprefs.getString("message","notfound");
@@ -201,7 +202,7 @@ info.setOnClickListener(new View.OnClickListener() {
         }
     }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void askPermission() {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:" + getPackageName()));
